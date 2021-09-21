@@ -1,0 +1,14 @@
+# Default values for mysql.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+label: mysql
+replicaCount: 1 
+image:
+  name: mysql
+  tag: latest
+  pullPolicy: Always
+rootPassword: admin
+ports:
+  source: 3306
+  target: 3306
