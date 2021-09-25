@@ -2,14 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: {{ .Values.label }}
-  name: mysql
-  namespace: mysql
+    app: {{ .Values.mysql.label }}
+  name: {{ .Values.mysql.name }}
+  namespace: {{ .Values.mysql.namespace }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.mysql.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Values.label }}
+      app: {{ .Values.mysql.label }}
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -18,13 +18,13 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ .Values.label }}
+        app: {{ .Values.mysql.label }}
     spec:
       containers:
-      - image: {{ .Values.image.name }}:{{ .Values.image.tag }}
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
+      - image: {{ .Values.mysql.image.name }}:{{ .Values.mysql.image.tag }}
+        imagePullPolicy: {{ .Values.mysql.image.pullPolicy }}
         name: mysql
         resources: {}
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: {{ .Values.rootPassword }}
+          value: {{ .Values.mysql.password }}

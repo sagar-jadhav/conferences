@@ -2,13 +2,23 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-label: mysql
-replicaCount: 1 
-image:
+mysql:
+  label: mysql
   name: mysql
-  tag: latest
-  pullPolicy: Always
-rootPassword: admin
-ports:
-  source: 3306
-  target: 3306
+  namespace: mysql
+  replicaCount: 1
+  postInstall:
+    name: post-install-db-init
+    image:
+      name: developersthought/post-install-db-init
+      tag: latest
+      pullPolicy: Always  
+  image:
+    name: mysql
+    tag: latest
+    pullPolicy: Always
+  password: admin
+  user: root
+  ports:
+    source: 3306
+    target: 3306
