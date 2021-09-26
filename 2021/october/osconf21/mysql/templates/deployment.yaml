@@ -23,8 +23,15 @@ spec:
       containers:
       - image: {{ .Values.mysql.image.name }}:{{ .Values.mysql.image.tag }}
         imagePullPolicy: {{ .Values.mysql.image.pullPolicy }}
-        name: mysql
+        name: {{ .Values.mysql.name }}
         resources: {}
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: {{ .Values.mysql.password }}
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: data
+      volumes:
+      - name: data
+        hostPath:
+          path: {{ .Values.mysql.hostPath.path }}   

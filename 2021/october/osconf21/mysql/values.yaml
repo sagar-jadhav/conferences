@@ -22,3 +22,5 @@ mysql:
   ports:
     source: 3306
     target: 3306
+  hostPath:
+    path: /root/db-data
