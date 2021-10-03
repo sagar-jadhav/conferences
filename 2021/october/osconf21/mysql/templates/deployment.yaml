@@ -34,4 +34,4 @@ spec:
       volumes:
       - name: data
         hostPath:
-          path: {{ .Values.mysql.hostPath.path }}   
+          path: {{ .Values.mysql.hostPath.db.path }}   
